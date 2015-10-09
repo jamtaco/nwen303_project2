@@ -5,9 +5,9 @@ import java.util.Random;
 
 public class Main {
 
-	private static int max = 10000;
+	private static int max = 1000;
 	private static int min = 1;
-	private static int size = 10000;
+	private static int size = max;
 
 	/**
 	 * @param args
