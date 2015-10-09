@@ -2,12 +2,11 @@ import java.util.Random;
 
 import mpi.MPI;
 import mpi.MPIException;
-import mpi.Status;
 
 
 public class SelectionSortParallel {
 
-	private static int max = 100;
+	private static int max = 50000;
 	private static int min = 1;
 	private static int size = max;
 
@@ -18,42 +17,30 @@ public class SelectionSortParallel {
 
 		MPI.Init(args) ;
 
-        int source;  // Rank of sender
-        int dest;    // Rank of receiver
-        int tag=50;  // Tag for messages
-        int next;
-        int prev;
-        int message[] = new int [1];
-
         int myrank = MPI.COMM_WORLD.getRank() ;
         int size = MPI.COMM_WORLD.getSize() ;
 
         int partition = nums.length/size;
 
-        next = (myrank + 1) % size;
-        prev = (myrank + size - 1) % size;
 
         if (0 == myrank) {
-        	message[0] = 10;
-
         	partition = nums.length/size;
         	System.out.println("Num Processes: " + size);
         }
     	long startTime = System.currentTimeMillis();
         int[] newarray = new int[partition];
-        System.out.println(newarray.length + "<<<<<<<<");
+
         MPI.COMM_WORLD.scatter(nums, partition, MPI.INT,newarray, partition,MPI.INT,0);
+//        SelectionSort s = new SelectionSort();
+//        s.sort(newarray);
         sort(newarray);
         MPI.COMM_WORLD.gather(nums, 0, MPI.INT,newarray,0,MPI.INT,0);
 
-        if (0 == myrank) {
-
+        if (myrank == 0) {
+        	 long elapsedTime = System.currentTimeMillis() - startTime;
+         	System.out.println("Sorted Array..");
+             System.out.println("Selection Sort (Parallel) Time: " + elapsedTime + "ms\n");
         }
-
-        long elapsedTime = System.currentTimeMillis() - startTime;
-    	System.out.println("Sorted Array..");
-        printnums(newarray);
-        System.out.println("Selection Sort (Parallel) Time: " + elapsedTime + "ms\n");
 
         MPI.Finalize();
 
