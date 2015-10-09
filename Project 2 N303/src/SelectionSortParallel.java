@@ -11,9 +11,9 @@ public class SelectionSortParallel {
 	private static int size = max;
 
 
-	//public static void main(String[] args, int[] nums) throws MPIException {
-	public static void main(String[] args) throws MPIException {
-		int[] nums = makeList();
+	public static void main(String[] args, int[] nums) throws MPIException {
+//	public static void main(String[] args) throws MPIException {
+//		int[] nums = makeList();
 
 		MPI.Init(args) ;
 
@@ -42,7 +42,7 @@ public class SelectionSortParallel {
              System.out.println("Selection Sort (Parallel) Time: " + elapsedTime + "ms\n");
         }
 
-        MPI.Finalize();
+        //MPI.Finalize();
 
         //Main.printnums(newarray);
     }

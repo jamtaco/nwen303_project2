@@ -14,11 +14,11 @@ public class ShellSortParallel {
 	private static int size = max;
 
 
-	//public static void main(String[] args, int[] nums) throws MPIException {
-	public static void main(String[] args) throws MPIException {
-		int[] nums = makeList();
+	public static void main(String[] args, int[] nums) throws MPIException {
+//		public static void main(String[] args) throws MPIException {
+//			int[] nums = makeList();
 
-		MPI.Init(args) ;
+		//MPI.Init(args) ;
 
         int myrank = MPI.COMM_WORLD.getRank() ;
         int size = MPI.COMM_WORLD.getSize() ;
@@ -43,7 +43,7 @@ public class ShellSortParallel {
         if (myrank == 0) {
 			long elapsedTime = System.currentTimeMillis() - startTime;
 			System.out.println("Sorted Array..");
-			printnums(newarray);
+			//printnums(newarray);
 			System.out.println("Shell Sort (Parallel) Time: " + elapsedTime + "ms\n");
         }
 
