@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import mpi.MPIException;
+
 
 public class Main {
 
-	private static int max = 1000;
-	private static int min = 1;
+	private static int max = 10;
+	private static int min = 0;
 	private static int size = max;
 
 	/**
@@ -19,10 +21,12 @@ public class Main {
 		int[] numsSel = makeList();
 		int[] numsBub = new int[size];
 		int[] numsShe = new int[size];
+		int[] numsSelPar = new int[size];
 
 		//copy array for different sorts
 		System.arraycopy(numsSel, 0, numsBub, 0, numsSel.length);
 		System.arraycopy(numsSel, 0, numsShe, 0, numsSel.length);
+		System.arraycopy(numsSel, 0, numsSelPar, 0, numsSel.length);
 
 		//Selection Sort
 		selectionSort(numsSel);
@@ -32,6 +36,24 @@ public class Main {
 
 		//Shell Sort
 		shellSort(numsShe);
+
+		//Selection Sort Parallel
+		selectionSortPar(args,numsSelPar);
+	}
+
+	private static void selectionSortPar(String[] args, int[] numsSelPar) {
+		SelectionSortParallel s = new SelectionSortParallel();
+		try {
+			s.main(args,numsSelPar);
+		} catch (MPIException e) {
+			e.printStackTrace();
+		}
+		StopWatch time = new StopWatch();
+		time.start();
+		s.sort(numsSelPar);
+		time.stop();
+		System.out.println("Selection Sort (Parallel) Time: " + time.getElapsedTime() + "ms");
+
 	}
 
 	private static void shellSort(int[] numsShe) {
@@ -40,7 +62,7 @@ public class Main {
 		time.start();
 		s.sort(numsShe);
 		time.stop();
-		System.out.println("Shell Sort Time: " + time.getElapsedTime() + "ms");
+		System.out.println("Shell Sort (Serial) Time: " + time.getElapsedTime() + "ms");
 
 	}
 
@@ -50,7 +72,7 @@ public class Main {
 		time.start();
 		b.sort(numsBub);
 		time.stop();
-		System.out.println("Bubble Sort Time: " + time.getElapsedTime() + "ms");
+		System.out.println("Bubble Sort (Serial) Time: " + time.getElapsedTime() + "ms");
 	}
 
 	private static void selectionSort(int[] numsSel) {
@@ -59,8 +81,7 @@ public class Main {
 		time.start();
 		s.sort(numsSel);
 		time.stop();
-		System.out.println("Selection Sort Time: " + time.getElapsedTime() + "ms");
-		//s.printnums(numsSel);
+		System.out.println("Selection Sort (Serial) Time: " + time.getElapsedTime() + "ms");
 	}
 
 	//makes array of random nums of specified size "size"
