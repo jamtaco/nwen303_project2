@@ -6,7 +6,7 @@ public class BubbleSort {
 	 */
 	public BubbleSort(){
 	}
-	
+
 	public int[]  sort(int[] nums) {
 		//iterate list
 		boolean swap = true;
@@ -22,16 +22,7 @@ public class BubbleSort {
 				}
 			}
 		}
-		
+
 		return nums;
 	}
-	
-	
-	public void printnums(int[] nums){
-		for(int i = 0; i < nums.length; i++){
-			System.out.print(nums[i] + ",");
-		}
-		System.out.println();
-	}
-
 }

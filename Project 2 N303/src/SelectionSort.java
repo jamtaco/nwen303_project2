@@ -4,10 +4,10 @@ public class SelectionSort {
 	/**
 	 * @param args
 	 */
-	
+
 	public SelectionSort(){
 	}
-	
+
 	public int[]  sort(int[] nums) {
 		//iterate list
 		for(int i = 0; i < nums.length; i++){
@@ -26,12 +26,4 @@ public class SelectionSort {
 		}
 		return nums;
 	}
-	
-	public void printnums(int[] nums){
-		for(int i = 0; i < nums.length; i++){
-			System.out.print(nums[i] + ",");
-		}
-		System.out.println();
-	}
-
 }
