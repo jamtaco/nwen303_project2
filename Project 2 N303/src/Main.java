@@ -7,7 +7,7 @@ import mpi.MPIException;
 
 public class Main {
 
-	private static int max = 50000;
+	private static int max = 16384;
 	private static int min = 1;
 	private static int size = max;
 
@@ -29,16 +29,16 @@ public class Main {
 		System.arraycopy(numsSel, 0, numsSelPar, 0, numsSel.length);
 
 		//Selection Sort
-		selectionSort(numsSel);
-
-		//Bubble Sort
-		bubbleSort(numsBub);
+//		selectionSort(numsSel);
+//
+//		//Bubble Sort
+//		bubbleSort(numsBub);
 
 		//Shell Sort
 		shellSort(numsShe);
 
 		//Selection Sort Parallel
-		selectionSortPar(args,numsSelPar);
+		//selectionSortPar(args,numsSelPar);
 	}
 
 	private static void selectionSortPar(String[] args, int[] numsSelPar) {
