@@ -7,7 +7,7 @@ import mpi.MPIException;
 
 public class Main {
 
-	private static int max = 100;
+	private static int max = 50000;
 	private static int min = 1;
 	private static int size = max;
 
@@ -42,20 +42,13 @@ public class Main {
 	}
 
 	private static void selectionSortPar(String[] args, int[] numsSelPar) {
-		SelectionSortParallel s = new SelectionSortParallel();
-		try {
-			//s.main(args,numsSelPar);
-			s.main(args);
-		} catch (MPIException e) {
-			e.printStackTrace();
-		}
-		StopWatch time = new StopWatch();
-		printnums(numsSelPar);
-		time.start();
-		s.sort(numsSelPar);
-		time.stop();
-		printnums(numsSelPar);
-		System.out.println("Selection Sort (Parallel) Time: " + time.getElapsedTime() + "ms\n");
+//		SelectionSortParallel s = new SelectionSortParallel();
+//		try {
+//			s.main(args,numsSelPar);
+//			//s.main(args);
+//		} catch (MPIException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -101,6 +94,12 @@ public class Main {
 	//prints out array
 	public static void printnums(int[] nums){
 		for(int i = 0; i < nums.length; i++){
+			if(i < nums.length-1){
+				if(nums[i] > nums[i+1]){
+					System.out.println("Array Unsorted!");
+					break;
+				}
+			}
 			System.out.print(nums[i] + ",");
 		}
 		System.out.println();
