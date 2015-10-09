@@ -7,8 +7,8 @@ import mpi.MPIException;
 
 public class Main {
 
-	private static int max = 10;
-	private static int min = 0;
+	private static int max = 100;
+	private static int min = 1;
 	private static int size = max;
 
 	/**
@@ -44,15 +44,18 @@ public class Main {
 	private static void selectionSortPar(String[] args, int[] numsSelPar) {
 		SelectionSortParallel s = new SelectionSortParallel();
 		try {
-			s.main(args,numsSelPar);
+			//s.main(args,numsSelPar);
+			s.main(args);
 		} catch (MPIException e) {
 			e.printStackTrace();
 		}
 		StopWatch time = new StopWatch();
+		printnums(numsSelPar);
 		time.start();
 		s.sort(numsSelPar);
 		time.stop();
-		System.out.println("Selection Sort (Parallel) Time: " + time.getElapsedTime() + "ms");
+		printnums(numsSelPar);
+		System.out.println("Selection Sort (Parallel) Time: " + time.getElapsedTime() + "ms\n");
 
 	}
 
@@ -62,7 +65,7 @@ public class Main {
 		time.start();
 		s.sort(numsShe);
 		time.stop();
-		System.out.println("Shell Sort (Serial) Time: " + time.getElapsedTime() + "ms");
+		System.out.println("Shell Sort (Serial) Time: " + time.getElapsedTime() + "ms\n");
 
 	}
 
@@ -72,7 +75,7 @@ public class Main {
 		time.start();
 		b.sort(numsBub);
 		time.stop();
-		System.out.println("Bubble Sort (Serial) Time: " + time.getElapsedTime() + "ms");
+		System.out.println("Bubble Sort (Serial) Time: " + time.getElapsedTime() + "ms\n");
 	}
 
 	private static void selectionSort(int[] numsSel) {
@@ -81,7 +84,7 @@ public class Main {
 		time.start();
 		s.sort(numsSel);
 		time.stop();
-		System.out.println("Selection Sort (Serial) Time: " + time.getElapsedTime() + "ms");
+		System.out.println("Selection Sort (Serial) Time: " + time.getElapsedTime() + "ms\n");
 	}
 
 	//makes array of random nums of specified size "size"
