@@ -9,7 +9,7 @@ public class BubbleSortParallel {
 	/*
 	 * These values are used for testing on the grid
 	 */
-	private static int max = 100;
+	private static int max = 16384;
 	private static int min = 1;
 	private static int size = max;
 

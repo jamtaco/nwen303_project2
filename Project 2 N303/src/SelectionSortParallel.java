@@ -6,7 +6,7 @@ import mpi.MPIException;
 
 public class SelectionSortParallel {
 
-	private static int max = 50000;
+	private static int max = 16384;
 	private static int min = 1;
 	private static int size = max;
 
