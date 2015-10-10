@@ -20,9 +20,11 @@ public class BubbleSortParallel {
 
 		//MPI.Init(args) ;
 
+		//get current rank
         int myrank = MPI.COMM_WORLD.getRank() ;
+        //get the number of available processors
         int size = MPI.COMM_WORLD.getSize() ;
-
+        //calculate the partition to divide the 
         int partition = nums.length/size;
 
 
