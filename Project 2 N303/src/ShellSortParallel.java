@@ -9,42 +9,51 @@ public class ShellSortParallel {
 	/*
 	 * These values are used for testing on the grid
 	 */
-	private static int max = 16384;
+	private static int max = 15000;
 	private static int min = 1;
 	private static int size = max;
 
 
 	public static void main(String[] args, int[] nums) throws MPIException {
-//		public static void main(String[] args) throws MPIException {
-//			int[] nums = makeList();
+		//create random list of size 'size'
+		int[] nums = makeList();
 
-		//MPI.Init(args) ;
+		//initialize mpi
+		MPI.Init(args) ;
 
+		//get current rank
         int myrank = MPI.COMM_WORLD.getRank() ;
+        //get the number of available processors
         int size = MPI.COMM_WORLD.getSize() ;
-
+        //calculate the partition to divide the array up in
         int partition = nums.length/size;
 
 
         if (0 == myrank) {
-        	partition = nums.length/size;
+        	//partition = nums.length/size;
         	System.out.println("Num Processes: " + size);
         }
 
+        //set up timer
     	long startTime = System.currentTimeMillis();
+    	
+    	//create new array to of partition size to be sent to comm world
         int[] newarray = new int[partition];
 
+        //'scatter' the new arrays to each of the processors
         MPI.COMM_WORLD.scatter(nums, partition, MPI.INT,newarray, partition,MPI.INT,0);
-//      ShellSort s = new ShellSort();
-//      s.sort(newarray);
+                
+        //each process should now sort their designated array
         sort(newarray);
+        
+        //gather the sorted arrays from comm world and reassemble them
         MPI.COMM_WORLD.gather(nums, 0, MPI.INT,newarray,0,MPI.INT,0);
 
         if (myrank == 0) {
-			long elapsedTime = System.currentTimeMillis() - startTime;
-			System.out.println("Sorted Array..");
-			//printnums(newarray);
-			System.out.println("Shell Sort (Parallel) Time: " + elapsedTime + "ms\n");
+        	//stop the timer
+        	long elapsedTime = System.currentTimeMillis() - startTime;
+         	System.out.println("Sorted Array..");
+            System.out.println("Shell Sort (Parallel) Time: " + elapsedTime + "ms\n");
         }
 
         MPI.Finalize();
