@@ -14,11 +14,11 @@ public class ShellSortParallel {
 	private static int size = max;
 
 
-	public static void main(String[] args, int[] nums) throws MPIException {
-//		public static void main(String[] args) throws MPIException {
-//			int[] nums = makeList();
+//	public static void main(String[] args, int[] nums) throws MPIException {
+		public static void main(String[] args) throws MPIException {
+			int[] nums = makeList();
 
-		//MPI.Init(args) ;
+		MPI.Init(args) ;
 
         int myrank = MPI.COMM_WORLD.getRank() ;
         int size = MPI.COMM_WORLD.getSize() ;

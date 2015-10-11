@@ -7,7 +7,7 @@ import mpi.MPIException;
 
 public class Main {
 
-	private static int max = 16384;
+	private static int max = 15000;
 	private static int min = 1;
 	private static int size = max;
 
@@ -48,35 +48,35 @@ public class Main {
 	}
 
 	private static void selectionSortPar(String[] args, int[] numsSelPar) {
-		SelectionSortParallel s = new SelectionSortParallel();
-		try {
-			s.main(args,numsSelPar);
-			//s.main(args);
-		} catch (MPIException e) {
-			e.printStackTrace();
-		}
+//		SelectionSortParallel s = new SelectionSortParallel();
+//		try {
+//			s.main(args,numsSelPar);
+//			//s.main(args);
+//		} catch (MPIException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
 	private static void bubbleSortPar(String[] args, int[] numsSelPar) {
-		BubbleSortParallel b = new BubbleSortParallel();
-		try {
-			b.main(args,numsSelPar);
-			//b.main(args);
-		} catch (MPIException e) {
-			e.printStackTrace();
-		}
+//		BubbleSortParallel b = new BubbleSortParallel();
+//		try {
+//			b.main(args,numsSelPar);
+//			//b.main(args);
+//		} catch (MPIException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
 	private static void shellSortPar(String[] args, int[] numsSelPar) {
-		ShellSortParallel s = new ShellSortParallel();
-		try {
-			s.main(args,numsSelPar);
-			//s.main(args);
-		} catch (MPIException e) {
-			e.printStackTrace();
-		}
+//		ShellSortParallel s = new ShellSortParallel();
+//		try {
+//			s.main(args,numsSelPar);
+//			//s.main(args);
+//		} catch (MPIException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
